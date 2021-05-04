@@ -12,9 +12,9 @@ import numpy as np
 
 class TextClassification:
     def __init__(self, path: str, sheet_name_train: str, sheet_name_dev: str, sheet_name_test: str,
-                 feature_columns: list[int], label_column: int):
+                 feature_columns: list[int], label_column: int, max_features: int):
         self.__tfidfTransformer = TfidfTransformer()
-        self.__tfidfVectorizer = TfidfVectorizer(ngram_range=(1, 5), analyzer='word', stop_words='english')
+        self.__tfidfVectorizer = TfidfVectorizer(max_features=max_features,ngram_range=(1, 5), analyzer='word', stop_words='english')
         self.__methods = {
             "svc": LinearSVC(),  # 0.821078431372549
             "rf": RandomForestClassifier(),  # 0.8284313725490197
