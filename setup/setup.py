@@ -1,11 +1,17 @@
 from classifier.textClassification import TextClassification
 
-path = "OUR_DIVIDES.xlsx"
-sheet_name_train = "train"
-sheet_name_dev = "dev"
-sheet_name_test = "test"
-feature_columns =[0,1]
-label_column = 2
-
-def setup(max_features):
-    return TextClassification(path,sheet_name_train,sheet_name_dev,sheet_name_test,feature_columns,label_column,max_features)
+#OUR_DIVIDES.xlsx
+#data_set_1.xlsx
+def setup(max_features: int = 1000, ngram_range: tuple = (1, 1), analyzer: str = "word") -> TextClassification:
+    return TextClassification(path="data_set_1.xlsx",
+                              sheet_name_train="train",
+                              sheet_name_dev="dev",
+                              sheet_name_test="test",
+                              feature_columns=[1],
+                              label_column=2,
+                              max_features=max_features,
+                              ngram_range=ngram_range,
+                              analyzer=analyzer,
+                              jump=0,
+                              min_df=4,
+                              fold= True)

@@ -2,18 +2,29 @@ from classifier.textClassification import TextClassification
 
 def generic_cli_():
     #def __init__(self,path: str, sheet_name_train: str,sheet_name_dev:str, sheet_name_test:str,feature_columns: list[int],label_column: int):
-    path = input("path of excel database")
-    sheet_name_train = input("sheet name of training set")
-    sheet_name_dev = input("sheet name of dev set or -1")
-    sheet_name_test = input("sheet name of test set or -1")
-    print("##################### FEATURE COLUMNS TO END ENTER -1")
+    path = input("path of excel database: ")
+    sheet_name_train = input("sheet name of training set: ")
+    sheet_name_dev = input("sheet name of dev set or -1: ")
+    sheet_name_test = input("sheet name of test set or -1: ")
+    print("##################### FEATURE COLUMNS TO END ENTER -1: ")
     feature_columns = []
-    i = eval(input("feature column:"))
+    i = eval(input("feature column: "))
     while i != -1:
         feature_columns.append(i)
-        i = eval(input("feature column:"))
-    label_column  = eval(input("label column:"))
-    tc = TextClassification(path,sheet_name_train,sheet_name_dev,sheet_name_test,feature_columns,label_column)
+        i = eval(input("feature column: "))
+    label_column  = eval(input("label column: "))
+    max_features = eval(input("max features: "))
+    start_ngram = eval(input("first parameter of ngram: "))
+    end_ngram = eval(input("second parameter of ngram: "))
+    ngram_range = (start_ngram,end_ngram)
+    analyzer = input("enter w for word and c for char: ")
+    while(analyzer != "w" and  analyzer != "c"):
+        analyzer = input("enter w for word and c for char: ")
+    if analyzer == "w":
+        analyzer = "word"
+    else:
+        analyzer = "char"
+    tc = TextClassification(path,sheet_name_train,sheet_name_dev,sheet_name_test,feature_columns,label_column,max_features,ngram_range,analyzer)
     print("OPTIONS :\n"
           "1: get score\n"
           "2: save classifier\n"
